@@ -72,3 +72,15 @@
 # may only use the libraries available on a fresh Python 2.7 install.  I doubt
 # you will need to use any libraries at all as this is just an algorithmic
 # challenge.
+
+# My Solution
+m = int(input())
+n = int(input())
+Matrix = [[0] * n for i in range(m)]
+for j in range(m):
+    string = input()
+    row = string.split(' ')
+    for k in range(n):
+        Matrix[j][k] = int(row[k])
+
+
