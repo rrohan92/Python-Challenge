@@ -1,4 +1,3 @@
-
 # Python Challenge
 
 # You are given a matrix with m rows and n columns of cells, each of which
@@ -74,13 +73,51 @@
 # challenge.
 
 # My Solution
-m = int(input())
-n = int(input())
+def getvalue(matrix, row, column, m, n):
+    if row >= 0 and row < m and column >= 0 and column < n:
+        return matrix[row][column]
+
+
+def region(matrix, boolean, row, column, counter, m, n):
+    counter += 1
+    boolean[row][column] = False
+    direction = [[1, 0], [0, 1], [-1, 0], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]
+
+    for i in range(8):
+        new_i = row + int(direction[i][0])
+        new_j = column + int(direction[i][1])
+        value = getvalue(matrix, new_i, new_j, m, n)
+        if value == 1 and boolean[new_i][new_j]:
+            counter = region(matrix, boolean, new_i, new_j, counter, m, n)
+
+    return counter
+
+
+m = int(raw_input())
+n = int(raw_input())
 Matrix = [[0] * n for i in range(m)]
+Boolean = [[0] * n for p in range(m)]
+List = []
 for j in range(m):
-    string = input()
+    string = raw_input()
     row = string.split(' ')
     for k in range(n):
         Matrix[j][k] = int(row[k])
 
+# Initializing a boolean 2d array with true
+for q in range(m):
+    for r in range(n):
+        Boolean[q][r] = True
 
+for a in range(m):
+    for b in range(n):
+        if Matrix[a][b] == 1 and Boolean[a][b]:
+            count = 0
+            final_count = region(Matrix, Boolean, a, b, count, m, n)
+            List.append(final_count)
+
+if len(List):
+    print(max(List))
+
+else:
+    print(0)
