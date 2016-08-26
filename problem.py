@@ -72,15 +72,18 @@
 # you will need to use any libraries at all as this is just an algorithmic
 # challenge.
 
+# ----------------------------------------------------------------------------------------- #
 # My Solution
 def getvalue(matrix, row, column, m, n):
     if row >= 0 and row < m and column >= 0 and column < n:
         return matrix[row][column]
 
 
+# Recursive function to get the region count
 def region(matrix, boolean, row, column, counter, m, n):
     counter += 1
     boolean[row][column] = False
+    # Directions to check adjacent cells
     direction = [[1, 0], [0, 1], [-1, 0], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]
 
     for i in range(8):
@@ -93,11 +96,13 @@ def region(matrix, boolean, row, column, counter, m, n):
     return counter
 
 
+# Main program
 m = int(raw_input())
 n = int(raw_input())
 Matrix = [[0] * n for i in range(m)]
 Boolean = [[0] * n for p in range(m)]
 List = []
+
 for j in range(m):
     string = raw_input()
     row = string.split(' ')
